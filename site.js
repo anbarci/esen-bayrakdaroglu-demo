@@ -60,6 +60,11 @@
 
   const dugme = document.querySelector('[data-tema-dugme]');
   if (dugme) {
+    const isinlar = [0, 45, 90, 135, 180, 225, 270, 315].map(a => `<line x1="12" y1="2" x2="12" y2="4.2" transform="rotate(${a} 12 12)"/>`).join('');
+    dugme.innerHTML = `<svg class="gece-simge" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><mask id="gece-maske"><rect width="24" height="24" fill="#fff"/><circle class="gece-golge" cx="17.5" cy="6.5" r="6" fill="#000"/></mask><circle class="gece-cekirdek" cx="12" cy="12" r="4.6" fill="currentColor" mask="url(#gece-maske)"/><g class="gece-isinlar" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">${isinlar}</g></svg>`;
+    const stil = document.createElement('style');
+    stil.textContent = '.gece-simge{width:1.25rem;height:1.25rem;overflow:visible}.gece-golge,.gece-cekirdek,.gece-isinlar{transition:transform .5s cubic-bezier(.23,1,.32,1),opacity .3s ease-out}.gece-golge{transform:translate(9px,-9px)}.gece-cekirdek{transform-box:fill-box;transform-origin:center}.gece-isinlar{transform-box:view-box;transform-origin:12px 12px}[data-koyu="1"] .gece-golge{transform:translate(-2.7px,2.7px)}[data-koyu="1"] .gece-cekirdek{transform:scale(1.55)}[data-koyu="1"] .gece-isinlar{opacity:0;transform:rotate(-60deg) scale(.4)}@media (prefers-reduced-motion:reduce){.gece-golge,.gece-cekirdek,.gece-isinlar{transition:none}}';
+    document.head.appendChild(stil);
     const kok = document.documentElement;
     const sorgu = matchMedia('(prefers-color-scheme: dark)');
     const koyuMu = () => (kok.dataset.theme || (sorgu.matches ? 'dark' : 'light')) === 'dark';
